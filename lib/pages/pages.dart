@@ -1,3 +1,2 @@
-export 'my_home/my_home_page.dart';
-export 'safe_covid/safe_covid_page.dart';
-export 'anima_covid/anima_covid_page.dart';
+export 'covid_safe/covid_safe_page.dart';
+export 'end_cradit/end_cradit_page.dart';

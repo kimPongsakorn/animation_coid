@@ -15,15 +15,15 @@ class HomeModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void openLiquidMenu(AnimationController controller) {
+  void openLiquidMenu(AnimationController? controller) {
     print('Menu is opening..');
     isOpening = !isOpening;
     if (isOpening) {
       openValue = 75.0;
-      controller.forward();
+      controller!.forward();
     } else {
       openValue = 0.0;
-      controller.reset();
+      controller!.reset();
     }
     notifyListeners();
   }
