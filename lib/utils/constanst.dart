@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 
 class Constant {
-  //routes
-  static const String COVID_SAFE_ROUTE = '/amnima/covid/safe';
-  static const String END_CRADIT_ROUTE = '/amnima/covid/safe/endcradit';
   //strings
   static const String APP_NAME = 'Animation COVID-19';
 
   // image
   static const String IMAGE_DIR = 'assets/images';
-  static const String FACE_MASK_NO_IMAGE = '$IMAGE_DIR/face-mask-no.png';
   static const String FACE_MASK_YES_IMAGE = '$IMAGE_DIR/face-mask-yes.png';
   static const String REPLAY_IMAGE = '$IMAGE_DIR/replay.png';
 
@@ -30,6 +26,7 @@ class Constant {
   static const String SAFE_AT_HOME_LOTIE =
       '$LOTTIE_DIR/18168-stay-safe-stay-home.json';
   static const String FACE_MASK_1_LOTIE = '$LOTTIE_DIR/face-mask.json';
+
   //color
   static const Color PRIMARY_COLOR = Color(0xFF212121);
   static const Color PINK_COLOR = Color(0xFFF35383);
