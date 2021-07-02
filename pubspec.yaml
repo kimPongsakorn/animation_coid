@@ -34,7 +34,7 @@ dependencies:
   delayed_display: ^2.0.0
   animated_text_kit: ^4.2.1
   animated_background: ^2.0.0
-
+  rive: ^0.7.22
 
 dev_dependencies:
   flutter_test:

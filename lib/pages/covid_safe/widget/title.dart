@@ -23,7 +23,11 @@ class TitleTip extends AnimatedWidget {
           ),
           children: const <TextSpan>[
             TextSpan(
-                text: '\nจากโรคติดต่อโควิด-19', style: TextStyle(fontSize: 22)),
+              text: '\nจากโรคติดต่อโควิด-19',
+              style: TextStyle(
+                fontSize: 22,
+              ),
+            ),
           ],
         ),
         textAlign: TextAlign.center,

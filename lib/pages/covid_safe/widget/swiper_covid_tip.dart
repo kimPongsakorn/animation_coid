@@ -4,8 +4,9 @@ import 'package:lottie/lottie.dart';
 
 class SwiperCovidTip extends StatefulWidget {
   final List<Map<String, String>> sceneData;
+  late final int currentScene;
 
-  SwiperCovidTip(this.sceneData);
+  SwiperCovidTip(this.sceneData, this.currentScene);
 
   @override
   _SwiperCovidTipState createState() => _SwiperCovidTipState();
@@ -13,30 +14,31 @@ class SwiperCovidTip extends StatefulWidget {
 
 class _SwiperCovidTipState extends State<SwiperCovidTip>
     with TickerProviderStateMixin {
-  final DecorationTween decorationTween = DecorationTween(
-    begin: BoxDecoration(
-      color: const Color(0xFFFFFFFF),
-      border: Border.all(style: BorderStyle.none),
-      borderRadius: BorderRadius.circular(60.0),
-      shape: BoxShape.rectangle,
-      boxShadow: const <BoxShadow>[
-        BoxShadow(
-          color: Color(0x66666666),
-          blurRadius: 10.0,
-          spreadRadius: 3.0,
-          offset: Offset(0, 6.0),
-        )
-      ],
-    ),
-    end: BoxDecoration(
-      color: const Color(0xFFFFFFFF),
-      border: Border.all(
-        style: BorderStyle.none,
-      ),
-      borderRadius: BorderRadius.zero,
-      // No shadow.
-    ),
-  );
+  DecorationTween get decorationTween => DecorationTween(
+        begin: BoxDecoration(
+          color: const Color(0xFFFFFFFF),
+          border: Border.all(style: BorderStyle.none),
+          borderRadius: BorderRadius.circular(60.0),
+          shape: BoxShape.rectangle,
+          boxShadow: const <BoxShadow>[
+            BoxShadow(
+              color: Color(0x66666666),
+              blurRadius: 10.0,
+              spreadRadius: 3.0,
+              offset: Offset(0, 6.0),
+            )
+          ],
+        ),
+        end: BoxDecoration(
+          color: const Color(0xFFFFFFFF),
+          border: Border.all(
+            style: BorderStyle.none,
+          ),
+          borderRadius: BorderRadius.zero,
+          // No shadow.
+        ),
+      );
+
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: const Duration(seconds: 3),
@@ -46,6 +48,7 @@ class _SwiperCovidTipState extends State<SwiperCovidTip>
   Widget build(BuildContext context) {
     return Swiper(
       itemBuilder: (BuildContext context, int index) {
+        print(index);
         return Column(
           children: [
             DecoratedBoxTransition(

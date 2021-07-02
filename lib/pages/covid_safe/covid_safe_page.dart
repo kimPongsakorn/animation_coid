@@ -19,7 +19,6 @@ class _CovidSafePageState extends State<CovidSafePage>
   late Animation<double> _covidAnimation;
   late AnimationController _covidController;
 
-  // size T
   late Animation<double> _animation;
   late AnimationController _controller;
 
@@ -59,73 +58,9 @@ class _CovidSafePageState extends State<CovidSafePage>
   @override
   void initState() {
     super.initState();
-    _titleController = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 2),
-    );
-    _titleController.forward();
-    _titleAnimation = Tween(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(_titleController);
-
-    // CirclePainter
-    _circlePainterController = AnimationController(
-      duration: const Duration(seconds: 2),
-      vsync: this,
-    )..repeat();
-
-    _covidController = AnimationController(
-      duration: const Duration(seconds: 3),
-      vsync: this,
-    );
-
-    _covidAnimation = CurvedAnimation(
-      parent: _covidController,
-      curve: Curves.easeIn,
-    )
-      ..addStatusListener((status) {
-        switch (status) {
-          case AnimationStatus.completed:
-            //เมื่อเสร็จให้ทำการย้อนกลับ
-            _covidController.reverse();
-
-            setState(() {
-              selectedCovid = true;
-              print(selectedCovid);
-            });
-            break;
-          case AnimationStatus.dismissed:
-            //เมื่อกลับไปจุดเริ่มต้น ให้กลับไปทำใหม่
-            _covidController.stop();
-
-            setState(() {
-              selectedShow = true;
-              _currentScene = ++_currentScene;
-              _controller = AnimationController(
-                vsync: this,
-                duration: Duration(seconds: 2),
-              );
-              _controller.forward();
-              // show SwiperCovidTip
-              _animation = Tween(
-                begin: 0.0,
-                end: 1.0,
-              ).animate(_controller);
-            });
-
-            if (_currentScene >= _sceneData.length) {
-              Navigator.of(context).push(CustomPageRoute(EndCraditPage()));
-            }
-            break;
-          case AnimationStatus.forward:
-            break;
-          case AnimationStatus.reverse:
-            break;
-        }
-      })
-      ..addStatusListener((state) => print('$state'));
-    _covidController.forward();
+    setupTitle();
+    setupCirclePainter();
+    setupCovid();
   }
 
   @override
@@ -180,7 +115,7 @@ class _CovidSafePageState extends State<CovidSafePage>
                               sizeFactor: _animation,
                               axis: Axis.horizontal,
                               axisAlignment: -1,
-                              child: SwiperCovidTip(_sceneData),
+                              child: SwiperCovidTip(_sceneData,_currentScene),
                             ),
                           )
                         : SizedBox(),
@@ -205,5 +140,80 @@ class _CovidSafePageState extends State<CovidSafePage>
     _covidController.dispose();
     _circlePainterController.dispose();
     super.dispose();
+  }
+
+  void setupCovid() {
+    _covidController = AnimationController(
+      duration: const Duration(seconds: 3),
+      vsync: this,
+    );
+
+    _covidAnimation = CurvedAnimation(
+      parent: _covidController,
+      curve: Curves.easeIn,
+    )..addStatusListener((status) {
+        switch (status) {
+          case AnimationStatus.completed:
+            _covidController.reverse();
+
+            setState(() {
+              selectedCovid = true;
+            });
+            break;
+          case AnimationStatus.dismissed:
+            _covidController.stop();
+
+            setState(() {
+              selectedShow = true;
+              _currentScene = ++_currentScene;
+              setupSwiper();
+            });
+            if (_currentScene >= _sceneData.length) {
+              Navigator.of(context).push(
+                CustomPageRoute(
+                  EndCraditPage(),
+                ),
+              );
+            }
+            break;
+          case AnimationStatus.forward:
+            break;
+          case AnimationStatus.reverse:
+            break;
+        }
+      });
+    _covidController.forward();
+  }
+
+  void setupSwiper() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    _controller.forward();
+    // show SwiperCovidTip
+    _animation = Tween(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(_controller);
+  }
+
+  void setupCirclePainter() {
+    _circlePainterController = AnimationController(
+      duration: const Duration(seconds: 2),
+      vsync: this,
+    )..repeat();
+  }
+
+  void setupTitle() {
+    _titleController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    _titleController.forward();
+    _titleAnimation = Tween(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(_titleController);
   }
 }
