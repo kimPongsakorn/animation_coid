@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math show sqrt;
 
-
 class CirclePainter extends CustomPainter {
   CirclePainter(
     this._animation, {
     required this.color,
   }) : super(repaint: _animation);
-  final Color color;
+
+  final Color? color;
   final Animation<double> _animation;
+
   void circle(Canvas canvas, Rect rect, double value) {
-    final double opacity = (1.0 - (value / 4.0)).clamp(0.0, 1.0);
-    final Color _color = color.withOpacity(opacity);
+    final double? opacity = (1.0 - (value / 4.0)).clamp(0.0, 1.0);
+    final Color _color = color!.withOpacity(opacity!);
     final double size = rect.width / 2;
     final double area = size * size;
     final double radius = math.sqrt(area * value / 4);

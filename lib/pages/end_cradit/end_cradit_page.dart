@@ -22,58 +22,46 @@ class _EndCraditPageState extends State<EndCraditPage>
         child: AnimatedBackground(
           behaviour: BubblesBehaviour(),
           vsync: this,
-          child: Center(
-              child: Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                height: 200,
-                child: TextEnd(),
-              ),
+              TextEndCradit(),
               SizedBox(
                 height: 20,
               ),
-              GestureDetector(
-                onTap: () {
-                  Navigator.of(context).push(
-                    CustomPageRoute(
-                      CovidSafePage(),
-                    ),
-                  );
-                },
-                child: Column(
-                  children: [
-                    ClipOval(
-                      child: Container(
-                        width: 100,
-                        height: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.2),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: Image.asset(
-                            Constant.REPLAY_IMAGE,
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      'เล่นอีกครั้ง...',
-                      style: TextStyle(
-                        fontFamily: "Prompt_Medium",
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              _buildBtnReplay(context),
             ],
-          )),
+          ),
         ),
+      ),
+    );
+  }
+
+  GestureDetector _buildBtnReplay(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          CustomPageRoute(
+            CovidSafePage(),
+          ),
+        );
+      },
+      child: Column(
+        children: [
+          ClipOval(
+            child: Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.4),
+              ),
+              child: Image.asset(
+                Constant.REPLAY_IMAGE,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
